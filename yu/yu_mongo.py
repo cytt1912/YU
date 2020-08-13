@@ -1,7 +1,8 @@
 import pymongo
+import base64
 
 #创建连接
-client = pymongo.MongoClient('localhost',port)
+client = pymongo.MongoClient('localhost',port=8080)
 #连接数据库
 db = client['db']
 db.authenticate("db","db")
@@ -16,6 +17,15 @@ for i in range(10):
     "name":"cyt"
     }
     collection.insert(data)
+
+
+#加解密
+a = 'test123'
+encode_str = base64.encodebytes(a.encode('utf8'))
+print(encode_str)
+c = base64.b64decode(encode_str).decode("utf-8")
+print(c)
+
 
 
 
